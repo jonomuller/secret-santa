@@ -11,7 +11,7 @@ import Foundation
 struct List {
   
   var people: [Person]
-  var assignedNames: [String]
+  var assignedPeople: [Person]
   var conditions: [String: String]
   
 }

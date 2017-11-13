@@ -22,7 +22,7 @@ func parsePeople() -> List {
   let people = parsePeople(json: json)
   let conditions = parseConditions(json: json)
   
-  return List(people: people, assignedNames: [], conditions: conditions)
+  return List(people: people, assignedPeople: [], conditions: conditions)
 }
 
 func parsePeople(json: JSON) -> [Person] {
