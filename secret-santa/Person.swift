@@ -12,5 +12,7 @@ struct Person {
   
   var name: String
   var email: String
+  var imagePath: String
+  var suggestions: [String]
   
 }

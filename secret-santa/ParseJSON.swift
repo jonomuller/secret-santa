@@ -19,16 +19,38 @@ func parsePeople() -> List {
     exit(0)
   }
   
-  let people = parseNames(json: json)
+  let people = parsePeople(json: json)
   let conditions = parseConditions(json: json)
   
   return List(people: people, assignedNames: [], conditions: conditions)
 }
 
-func parseNames(json: JSON) -> [Person] {
-  return []
+func parsePeople(json: JSON) -> [Person] {
+  var people: [Person] = []
+  
+  for (_, subJson): (String, JSON) in json["people"] {
+    var suggestions: [String] = []
+    
+    for (_, subSubJson): (String, JSON) in subJson["suggestions"] {
+      suggestions.append(subSubJson.stringValue)
+    }
+    
+    let person = Person(name: subJson["name"].stringValue,
+                        email: subJson["email"].stringValue,
+                        imagePath: subJson["image_path"].stringValue,
+                        suggestions: suggestions)
+    people.append(person)
+  }
+  
+  return people
 }
 
 func parseConditions(json: JSON) -> [String: String] {
-  return [:]
+  var conditions: [String: String] = [:]
+  
+  for (_, subJson): (String, JSON) in json["conditions"] {
+    conditions[subJson["first"].stringValue] = subJson["second"].stringValue
+  }
+  
+  return conditions
 }
