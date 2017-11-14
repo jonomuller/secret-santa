@@ -8,7 +8,7 @@
 
 import Foundation
 
-var list = parsePeople()
+var list = parseList()
 assign()
 
 /*

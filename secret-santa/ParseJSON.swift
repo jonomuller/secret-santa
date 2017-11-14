@@ -8,7 +8,7 @@
 
 import Foundation
 
-func parsePeople() -> List {
+func parseList() -> List {
   let data = NSData(contentsOfFile: CommandLine.arguments[1]) as! Data
   
   var json = JSON()

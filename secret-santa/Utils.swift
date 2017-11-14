@@ -23,11 +23,18 @@ func generatePerson(person: Person) -> (assigned: Person?, error: String?) {
     if list.assignedPeople.count == list.people.count - 1 && random == index {
       return (nil, ERROR)
     }
-  } while (random == index || list.assignedPeople.contains(where: { $0.name == list.people[random].name }))
+  } while (invalidAssignment(index: index!, random: random))
   
   let assignedPerson = list.people[random]
   list.assignedPeople.append(assignedPerson)
   return (assignedPerson, nil)
+}
+
+func invalidAssignment(index: Int, random: Int) -> Bool {
+  return random == index
+    || list.assignedPeople.contains(where: { $0.name == list.people[random].name })
+    || list.conditions[list.people[index].name] == list.people[random].name
+    || list.conditions[list.people[random].name] == list.people[index].name
 }
 
 func assign() {
@@ -46,8 +53,9 @@ func assign() {
     for (i, person) in list.people.enumerated() {
       let assignedPerson = list.assignedPeople[i]
       print("\(person.name) got \(assignedPerson.name)")
-      // Do assertions here
-      assert(person.name != assignedPerson.name, "Failed")
+      assert(person.name != assignedPerson.name, "Failed - person assigned to themself")
+      assert(list.conditions[person.name] != assignedPerson.name, "Condition fail")
+      assert(list.conditions[assignedPerson.name] != person.name, "Condition fail")
       // sendEmail(name: name, assigned: assignedName)
     }
   }
