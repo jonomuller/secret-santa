@@ -19,7 +19,6 @@ func generatePerson(person: Person) -> (assigned: Person?, error: String?) {
     random = Int(arc4random_uniform(UInt32(list.people.count)))
     
     // Error case if last person can only be assigned to themself
-    // Move to method cannotBeAssigned() -> Bool and check for other permutations
     if list.assignedPeople.count == list.people.count - 1 && random == index {
       return (nil, ERROR)
     }
@@ -53,10 +52,12 @@ func assign() {
     for (i, person) in list.people.enumerated() {
       let assignedPerson = list.assignedPeople[i]
       print("\(person.name) got \(assignedPerson.name)")
+      
       assert(person.name != assignedPerson.name, "Failed - person assigned to themself")
       assert(list.conditions[person.name] != assignedPerson.name, "Condition fail")
       assert(list.conditions[assignedPerson.name] != person.name, "Condition fail")
-      // sendEmail(name: name, assigned: assignedName)
+      
+      sendEmail(person: person, assigned: assignedPerson)
     }
   }
 }
@@ -64,33 +65,35 @@ func assign() {
 // MARK: - Script helpers
 
 func sendEmail(person: Person, assigned: Person) {
-  let script = NSAppleScript.init(source:
-    "set emailSender to \"Weird Fish\"\n" +
-      "set emailTo to \"\(person.email)\"\n" +
-      "set theSubject to \"Secret Santa\"\n" +
-      "set theContent to \"Dear \(person.name),\n\nYou have been assigned \(assigned.name) for Secret Santa.\"\n" +
-      "set theAttachmentFile to \"Hawkeye:Users:jonomuller:Documents:secret-santa:secret-santa:\(assigned.imagePath).png\"\n" +
-      "tell application \"Mail\"\n" +
-      "set newMessage to make new outgoing message with properties {sender:emailSender, subject:theSubject, content:theContent, visible:true}\n" +
-      "tell newMessage\n" +
-      "make new to recipient at end of to recipients with properties {address:emailTo}\n" +
-      "make new attachment with properties {file name:theAttachmentFile as alias}\n" +
-      "delay 1" +
-      "send\n" +
-      "end tell\n" +
-    "end tell\n")
-  
-  var error: NSDictionary?
-  script?.executeAndReturnError(&error)
-  if (error != nil) {
-    //        print("error: \(error)")
-  }
+  let imagePath = CommandLine.arguments[2] + assigned.imagePath
+  let formattedSuggestions = "\u{2022} " + assigned.suggestions.joined(separator: "\n\u{2022} ")
+  runScript(name: "send_email",
+            arguments: [person.name, person.email, assigned.name, imagePath, formattedSuggestions])
 }
 
-func runScript(path: String) {
+func runScript(name: String, arguments: [String]) {
   let task = Process()
   task.launchPath = "/usr/bin/osascript"
-  task.arguments = [path]
+  
+  if let path = Bundle.main.path(forResource: name, ofType: "scpt") {
+    task.arguments = [path] + arguments
+  } else {
+    print("Script not found")
+    exit(1)
+  }
+  
+  let outPipe = Pipe()
+  task.standardOutput = outPipe
   task.launch()
-  print("Completed executing \(path)")
+  let fileHandle = outPipe.fileHandleForReading
+  let data = fileHandle.readDataToEndOfFile()
+  task.waitUntilExit()
+  
+  let status = task.terminationStatus
+  if status != 0 {
+    let error = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
+    print(error)
+  }
+
+  print("Completed executing \(name)")
 }

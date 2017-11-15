@@ -13,17 +13,23 @@
 		AFB08D861FB393F600573476 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB08D821FB3910D00573476 /* SwiftyJSON.swift */; };
 		AFB08D881FB3A5EA00573476 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB08D871FB3A5E900573476 /* Person.swift */; };
 		AFFB2A581FBA554A00A4A170 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB2A571FBA554A00A4A170 /* Utils.swift */; };
+		AFFB2A631FBB86A900A4A170 /* delete_emails.scpt in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFFB2A5B1FBB7CD700A4A170 /* delete_emails.scpt */; };
+		AFFB2A641FBB86A900A4A170 /* quit_mail.scpt in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFFB2A5A1FBB7CD700A4A170 /* quit_mail.scpt */; };
+		AFFB2A651FBB86A900A4A170 /* send_email.scpt in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFFB2A5C1FBB7CD700A4A170 /* send_email.scpt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		AF9B59271DE728A600ED7D7D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = usr/share/man/man1;
-			dstSubfolderSpec = 10;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
 			files = (
+				AFFB2A631FBB86A900A4A170 /* delete_emails.scpt in CopyFiles */,
+				AFFB2A641FBB86A900A4A170 /* quit_mail.scpt in CopyFiles */,
+				AFFB2A651FBB86A900A4A170 /* send_email.scpt in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -35,6 +41,9 @@
 		AFB08D821FB3910D00573476 /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		AFB08D871FB3A5E900573476 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		AFFB2A571FBA554A00A4A170 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		AFFB2A5A1FBB7CD700A4A170 /* quit_mail.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = quit_mail.scpt; path = ../Scripts/quit_mail.scpt; sourceTree = "<group>"; };
+		AFFB2A5B1FBB7CD700A4A170 /* delete_emails.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = delete_emails.scpt; path = ../Scripts/delete_emails.scpt; sourceTree = "<group>"; };
+		AFFB2A5C1FBB7CD700A4A170 /* send_email.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = send_email.scpt; path = ../Scripts/send_email.scpt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +81,7 @@
 				AFB08D781FB36A0600573476 /* ParseJSON.swift */,
 				AFB08D7A1FB36B1C00573476 /* List.swift */,
 				AFB08D871FB3A5E900573476 /* Person.swift */,
+				AFFB2A5D1FBB7CE700A4A170 /* Scripts */,
 				AF9B59331DE7324E00ED7D7D /* Frameworks */,
 			);
 			path = "secret-santa";
@@ -83,6 +93,17 @@
 				AFB08D821FB3910D00573476 /* SwiftyJSON.swift */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		AFFB2A5D1FBB7CE700A4A170 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				AFFB2A5B1FBB7CD700A4A170 /* delete_emails.scpt */,
+				AFFB2A5A1FBB7CD700A4A170 /* quit_mail.scpt */,
+				AFFB2A5C1FBB7CD700A4A170 /* send_email.scpt */,
+			);
+			name = Scripts;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

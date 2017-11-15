@@ -14,6 +14,6 @@ assign()
 /*
  * Optional script to delete the emails sent (to remove any trace of the assigned names)
  */
-// runScript(path: "/Users/jonomuller/Documents/secret-santa/secret-santa/delete_emails.scpt")
+// runScript(name: "delete_emails", arguments: [])
 
-// run script to quit Mail
+// runScript(name: "quit_mail", arguments: [])

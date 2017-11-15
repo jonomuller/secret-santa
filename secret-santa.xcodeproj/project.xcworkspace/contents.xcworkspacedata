@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SecretSanta.xcodeproj">
+      location = "self:/Users/jonomuller/Documents/projects/secret-santa/secret-santa.xcodeproj">
    </FileRef>
 </Workspace>
