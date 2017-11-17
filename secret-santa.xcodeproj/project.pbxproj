@@ -41,9 +41,9 @@
 		AFB08D821FB3910D00573476 /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		AFB08D871FB3A5E900573476 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		AFFB2A571FBA554A00A4A170 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		AFFB2A5A1FBB7CD700A4A170 /* quit_mail.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = quit_mail.scpt; path = ../Scripts/quit_mail.scpt; sourceTree = "<group>"; };
-		AFFB2A5B1FBB7CD700A4A170 /* delete_emails.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = delete_emails.scpt; path = ../Scripts/delete_emails.scpt; sourceTree = "<group>"; };
-		AFFB2A5C1FBB7CD700A4A170 /* send_email.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = send_email.scpt; path = ../Scripts/send_email.scpt; sourceTree = "<group>"; };
+		AFFB2A5A1FBB7CD700A4A170 /* quit_mail.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = quit_mail.scpt; sourceTree = "<group>"; };
+		AFFB2A5B1FBB7CD700A4A170 /* delete_emails.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; name = delete_emails.scpt; path = "secret-santa/Scripts/delete_emails.scpt"; sourceTree = SOURCE_ROOT; };
+		AFFB2A5C1FBB7CD700A4A170 /* send_email.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = send_email.scpt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +102,7 @@
 				AFFB2A5A1FBB7CD700A4A170 /* quit_mail.scpt */,
 				AFFB2A5C1FBB7CD700A4A170 /* send_email.scpt */,
 			);
-			name = Scripts;
-			path = "New Group";
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
