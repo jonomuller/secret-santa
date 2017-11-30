@@ -14,6 +14,7 @@ assign()
 /*
  * Optional script to delete the emails sent (to remove any trace of the assigned names)
  */
-// runScript(name: "delete_emails", arguments: [])
+runScript(name: "delete_emails", arguments: [])
 
-// runScript(name: "quit_mail", arguments: [])
+runScript(name: "quit_mail", arguments: [])
+

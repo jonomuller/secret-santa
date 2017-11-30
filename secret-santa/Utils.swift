@@ -51,7 +51,7 @@ func assign() {
   } else {
     for (i, person) in list.people.enumerated() {
       let assignedPerson = list.assignedPeople[i]
-      print("\(person.name) got \(assignedPerson.name)")
+//      print("\(person.name) got \(assignedPerson.name)")
       
       assert(person.name != assignedPerson.name, "Failed - person assigned to themself")
       assert(list.conditions[person.name] != assignedPerson.name, "Condition fail")
@@ -66,9 +66,14 @@ func assign() {
 
 func sendEmail(person: Person, assigned: Person) {
   let imagePath = CommandLine.arguments[2] + assigned.imagePath
-  let formattedSuggestions = "\u{2022} " + assigned.suggestions.joined(separator: "\n\u{2022} ")
-  runScript(name: "send_email",
-            arguments: [person.name, person.email, assigned.name, imagePath, formattedSuggestions])
+  var arguments = [person.name, person.email, assigned.name, imagePath]
+  
+  if assigned.suggestions.count > 0 {
+    let formattedSuggestions = "\u{2022} " + assigned.suggestions.joined(separator: "\n\u{2022} ")
+    arguments.append(formattedSuggestions)
+  }
+  
+  runScript(name: "send_email", arguments: arguments)
 }
 
 func runScript(name: String, arguments: [String]) {
