@@ -1,0 +1,15 @@
+{
+  "name": "secret-santa",
+  "version": "0.1.0",
+  "description": "Program to assign secret santa via email",
+  "main": "index.js",
+  "repository": "https://github.com/jonomuller/secret-santa.git",
+  "author": "Jono Muller <jonomuller@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemailer": "^4.6.8"
+  }
+}
