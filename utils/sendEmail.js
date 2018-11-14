@@ -8,12 +8,22 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export default async function sendEmail(from, to) {
+export default async function sendEmail(to, assigned) {
+  const message = `Dear ${to.name},\n\n` +
+                  `You have been assigned ${assigned.name} for Secret Santa.\n\n` +
+                  `${assigned.suggestions
+                    ? `Here are some suggestions of what to get them:\n` + 
+                      `${assigned.suggestions.map(suggestion => `– ${suggestion}`).join('\n')}`
+                    : ""}`;
+
   const options = {
-    from: 'Secret Santa',
+    from: {
+      name: 'Secret Santa',
+      email: 'rugen.secret.santa@gmail.com'
+    },
     to: to.email,
     subject: `${to.name}'s Secret Santa`,
-    html: `<p>Hello!</p>`
+    text: message
   };
 
   await transporter.sendMail(options);
