@@ -9,27 +9,30 @@ const transporter = nodemailer.createTransport({
 });
 
 export default async function sendEmail(to, assigned) {
-  const imageId = `${assigned.name}.png`;
+  const { name: assignedName, suggestions, imagePath } = assigned;
   const message = `<p>Dear ${to.name},<p>` +
-                  `<p>You have been assigned ${assigned.name} for Secret Santa.<p>` +
-                  `${assigned.suggestions
+                  `<p>You have been assigned ${assignedName} for Secret Santa.<p>` +
+                  `${suggestions
                     ? `<p>Here are some suggestions of what to get them:</p>` + 
-                      `<ul>${assigned.suggestions.map(suggestion => `<li>${suggestion}</li>`).join('\n')}</ul>`
+                      `<ul>${suggestions.map(suggestion => `<li>${suggestion}</li>`).join('\n')}</ul>`
                     : ""}` +
-                  `<img src="${imageId}"/>`;
+                  `${imagePath
+                    ? `<img src="cid:${assigned.imagePath}"/>`
+                    : ""}`;
+
+  const attachments = imagePath
+    ? [{ path: `config/${imagePath}`, cid: imagePath }]
+    : null;
 
   const options = {
     from: {
       name: 'Secret Santa',
-      email: 'rugen.secret.santa@gmail.com'
+      email: process.env.FROM_EMAIL
     },
     to: to.email,
     subject: `${to.name}'s Secret Santa`,
     html: message,
-    attachments: [{
-      path: `config/images/${imageId}`,
-      cid: imageId
-    }]
+    attachments
   };
 
   await transporter.sendMail(options);
