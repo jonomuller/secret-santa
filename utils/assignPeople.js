@@ -37,6 +37,6 @@ const shuffle = arr => arr
 
 function isInvalidAssignment(sender, receiver, conditions) {
   return sender === receiver
-    || conditions[sender].includes(receiver)
-    || conditions[receiver].includes(sender);
+    || (conditions[sender] && conditions[sender].includes(receiver))
+    || (conditions[receiver] && conditions[receiver].includes(sender));
 }
